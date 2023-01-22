@@ -14,11 +14,13 @@
 
 typedef struct s_connect_data
 {
-    void *mlx_ptr;
-    void *win_ptr;
-    char *map[10000];
-    int map_height;
-    int map_weight;
+    void    *mlx_ptr;
+    void    *win_ptr;
+    char    *map[10000];
+    int     map_height;
+    int     map_weight;
+    int     player_x;
+    int     player_y;
 
 }   t_connect_data;
 
@@ -32,16 +34,13 @@ typedef struct s_position
 typedef struct s_images
 {
     void    *player;
+    void    *player_back;
+    void    *player_right;
+    void    *player_left;
 	void    *coin;
 	void    *floor;
 	void    *wall;
 	void    *exit;
-    void    *player_front;
-    void    *player_back;
-    void    *player_right;
-    void    *player_left;
-    int     player_x;
-    int     player_y;
 }   t_images;
 
 
@@ -53,6 +52,7 @@ char	*get_next_line(int fd);
 void    ft_checker(t_connect_data *check);
 void    put_map(t_connect_data map);
 int     ft_moves(int key);
+void	find_player(t_connect_data *data);
 
 
 # endif

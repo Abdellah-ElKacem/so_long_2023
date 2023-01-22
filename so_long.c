@@ -6,13 +6,12 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:14:05 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/21 16:18:12 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/01/22 16:37:14 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <fcntl.h>
-
 
 int main(int ac, char **av)
 {
@@ -33,10 +32,11 @@ int main(int ac, char **av)
         window->map_height++;
         window->map[window->map_height] = ft_strdup(get_next_line(fd));
     }
-    ft_checker(window);
     window->win_ptr = mlx_new_window(window->mlx_ptr, window->map_weight * 32, window->map_height * 32, "so_long");
+    ft_checker(window);
     put_map(*window);
+    find_player(window);
+    // mlx_hook(window->win_ptr, 17, 0, ft_moves, NULL);
     mlx_key_hook(window->win_ptr, ft_moves, NULL);
     mlx_loop(window->mlx_ptr);
-    return (0);
 }
