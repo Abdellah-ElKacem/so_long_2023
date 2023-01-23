@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:41:14 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/22 16:23:39 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/01/23 20:18:13 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	ft_checker(t_connect_data *check)
 		exit(write(1, "Error too many carac !", 23));
 }
 
-void put_map(t_connect_data map)
+void put_map(t_connect_data *map)
 {
 	t_images img;
 	int x;
@@ -176,29 +176,30 @@ void put_map(t_connect_data map)
 	dim = 0;
 	dim_x = 0;
 	dim_y = 0;
-	img.floor = mlx_xpm_file_to_image(map.mlx_ptr, "./textures/floor.xpm", &dim, &dim);
-	img.player = mlx_xpm_file_to_image(map.mlx_ptr, "./textures/player.xpm", &dim, &dim);
-	img.player_back = mlx_xpm_file_to_image(map.mlx_ptr, "./textures/player_back.xpm", &dim, &dim);
-	img.player_right = mlx_xpm_file_to_image(map.mlx_ptr, "./textures/player_right.xpm", &dim, &dim);
-	img.player_left = mlx_xpm_file_to_image(map.mlx_ptr, "./textures/player_left.xpm", &dim, &dim);
-	img.coin = mlx_xpm_file_to_image(map.mlx_ptr, "./textures/coin.xpm", &dim, &dim);
-	img.exit = mlx_xpm_file_to_image(map.mlx_ptr, "./textures/exit.xpm", &dim, &dim);
-	img.wall = mlx_xpm_file_to_image(map.mlx_ptr, "./textures/wall.xpm", &dim, &dim);
+	img.floor = mlx_xpm_file_to_image(map->mlx_ptr, "./textures/floor.xpm", &dim, &dim);
+	img.player = mlx_xpm_file_to_image(map->mlx_ptr, "./textures/player.xpm", &dim, &dim);
+	img.coin = mlx_xpm_file_to_image(map->mlx_ptr, "./textures/coin.xpm", &dim, &dim);
+	img.exit = mlx_xpm_file_to_image(map->mlx_ptr, "./textures/exit.xpm", &dim, &dim);
+	img.wall = mlx_xpm_file_to_image(map->mlx_ptr, "./textures/wall.xpm", &dim, &dim);
 	x = 0;
 	y = 0;
-	while (x < map.map_height)
+	while (x < map->map_height)
 	{
-		while (y < map.map_weight)
+		while (y < map->map_weight)
 		{
-			mlx_put_image_to_window(map.mlx_ptr, map.win_ptr, img.floor, dim_x, dim_y);
-			if (map.map[x][y] == '1')
-				mlx_put_image_to_window(map.mlx_ptr, map.win_ptr, img.wall, dim_x, dim_y);
-			else if (map.map[x][y] == 'P')
-				mlx_put_image_to_window(map.mlx_ptr, map.win_ptr, img.player, dim_x, dim_y);
-			else if (map.map[x][y] == 'C')
-				mlx_put_image_to_window(map.mlx_ptr, map.win_ptr, img.coin, dim_x, dim_y);
-			else if (map.map[x][y] == 'E')
-				mlx_put_image_to_window(map.mlx_ptr, map.win_ptr, img.exit, dim_x, dim_y);
+			mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, img.floor, dim_x, dim_y);
+			if (map->map[x][y] == '1')
+				mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, img.wall, dim_x, dim_y);
+			else if (map->map[x][y] == 'P')
+			{
+				mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, img.player, dim_x, dim_y);
+				map->player_x = y;
+				map->player_y = x;
+			}
+			else if (map->map[x][y] == 'C')
+				mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, img.coin, dim_x, dim_y);
+			else if (map->map[x][y] == 'E')
+				mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, img.exit, dim_x, dim_y);
 			dim_x += 32;
 			y++;
 		}
@@ -207,5 +208,4 @@ void put_map(t_connect_data map)
 		x++;
 		y = 0;
 	}
-	
 }

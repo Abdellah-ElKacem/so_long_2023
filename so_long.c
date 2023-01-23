@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:14:05 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/22 16:37:14 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/01/23 20:25:00 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ int main(int ac, char **av)
     }
     window->win_ptr = mlx_new_window(window->mlx_ptr, window->map_weight * 32, window->map_height * 32, "so_long");
     ft_checker(window);
-    put_map(*window);
     find_player(window);
+    put_map(window);
+    check_coin(window);
+    printf("%d\n", window->coin);
     // mlx_hook(window->win_ptr, 17, 0, ft_moves, NULL);
-    mlx_key_hook(window->win_ptr, ft_moves, NULL);
+    mlx_hook(window->win_ptr, 2, 0, ft_moves, window);
     mlx_loop(window->mlx_ptr);
 }
