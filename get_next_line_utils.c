@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 20:52:23 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/19 21:05:43 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:08:59 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (NULL);
 }
 
-size_t	ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 
