@@ -6,7 +6,7 @@
 #    By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/28 18:01:34 by ael-kace          #+#    #+#              #
-#    Updated: 2023/01/28 19:16:17 by ael-kace         ###   ########.fr        #
+#    Updated: 2023/01/30 06:09:05 by ael-kace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,13 @@ HEADER = so_long.h
 
 SRCS =  check_map.c check_map1.c check_map2.c check_map3.c \
 		check_stuff.c ft_move.c ft_printf.c get_next_line.c \
-		get_next_line_utils.c so_long.c \
+		get_next_line_utils.c so_long.c ft_strncmp.c valid_path.c \
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
-CC_FLAGS = -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror
+CC_FLAGS = -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror -g
 
 all :  $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:23:40 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/28 19:17:35 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/01/31 00:34:09 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,16 @@ typedef struct s_connect_data
 	char	*map[10000];
 	int		map_height;
 	int		map_weight;
+	char	*map_temp[10000];
+	int		map_height_temp;
+	int		map_weight_temp;
 	int		player_x;
 	int		player_y;
+	int		pl_x;
+	int		pl_y;
 	int		coin;
 	int		player;
+	int		exit;
 	int		x;
 	int		y;
 	int		dim_x;
@@ -74,10 +80,13 @@ int		check_collection(t_connect_data *data);
 void	ft_next(t_connect_data *map, t_images img);
 void	move_up(t_connect_data *data);
 void	check_coin(t_connect_data *data);
+void	the_exit(t_connect_data *data);
 int		ft_exie(void);
 int		ft_printf(const char *str, ...);
 void	find_player(t_connect_data *data);
 void	check_coin(t_connect_data *data);
 void	player_move(t_connect_data *data);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		path_check(t_connect_data *map, int y, int x);
 
 #endif

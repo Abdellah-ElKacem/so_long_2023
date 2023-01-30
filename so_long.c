@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:14:05 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/28 18:41:42 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/01/31 00:49:15 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ void	the_checker(t_connect_data *window)
 {
 	ft_checker(window);
 	put_map_f(window);
-	put_map(window);
 	put_map1(window);
+	put_map(window);
 	put_map2(window);
 	put_map3(window);
 	check_coin(window);
+	the_exit(window);
+	if (!path_check(window, window->player_y, window->player_x))
+		exit (write(1, "Error\n", 6));
 }
 
 int	main(int ac, char **av)
@@ -47,6 +50,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		exit(write(1, "Error Check Arguments !\n", 25));
+	if (ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".ber", 4) != 0)
+		exit(write(1, "Error Check Extentions !\n", 26));
 	window = malloc(sizeof(t_connect_data));
 	if (!window)
 		return (0);
