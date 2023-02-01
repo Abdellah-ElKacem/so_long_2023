@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:44:05 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/28 18:28:58 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:51:31 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	ft_checker(t_connect_data *check)
 	if (check_map_len(check) == 1)
 		exit(write(1, "Error too many carac !", 23));
 	if (check_map_rec(check) != 1)
-		exit(write(1, "Error Map is not Rectangle !", 29));
+		exit(write(1, "Error Map is Rectangle !", 24));
 }

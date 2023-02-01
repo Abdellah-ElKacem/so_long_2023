@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:23:40 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/31 22:35:41 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:32:56 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ typedef struct s_images
 
 typedef struct data
 {
-	int	exit;
 	int	coin;
+	int	exit;
+
 }	t_data;
 
 typedef struct s_connect_data
@@ -50,6 +51,7 @@ typedef struct s_connect_data
 	int		map_height;
 	int		map_weight;
 	char	*map_temp[10000];
+	char	*map_temp_e[10000];
 	int		player_x;
 	int		player_y;
 	int		coin;
@@ -90,5 +92,6 @@ void	check_coin(t_connect_data *data);
 void	player_move(t_connect_data *data);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		path_check(t_connect_data *map, int y, int x, t_data *data);
+int		path_check_e(t_connect_data *map, int y, int x, t_data *data);
 
 #endif

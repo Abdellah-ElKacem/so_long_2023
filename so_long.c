@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:14:05 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/01/31 22:43:23 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:28:22 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	create_map(t_connect_data *window, char **av)
 {
-	int	fd;
-	char *readd;
+	int		fd;
+	char	*readd;
 
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
@@ -26,6 +26,7 @@ int	create_map(t_connect_data *window, char **av)
 	{
 		window->map[window->map_height] = ft_strdup(readd);
 		window->map_temp[window->map_height] = ft_strdup(readd);
+		window->map_temp_e[window->map_height] = ft_strdup(readd);
 		window->map_height++;
 		free(readd);
 		readd = get_next_line(fd);
@@ -45,10 +46,20 @@ void	the_checker(t_connect_data *window)
 	the_exit(window);
 }
 
+void	error_path(t_connect_data *window)
+{
+	t_data	data;
+
+	data.coin = window->coin;
+	data.exit = window->exit;
+	if (!path_check(window, window->player_y, window->player_x, &data)
+		|| !path_check_e(window, window->player_y, window->player_x, &data))
+		exit (write(1, "Error : Check-Path failed\n", 27));
+}
+
 int	main(int ac, char **av)
 {
 	t_connect_data	*window;
-	t_data			data;
 
 	if (ac != 2)
 		exit(write(1, "Error Check Arguments !\n", 25));
@@ -62,11 +73,8 @@ int	main(int ac, char **av)
 	window->win_ptr = mlx_new_window(window->mlx_ptr \
 		, window->map_weight * 32, window->map_height * 32, "so_long");
 	the_checker(window);
-	data.exit = window->exit;
-	data.coin = window->coin;
-	if (!path_check(window, window->player_y, window->player_x, &data))
-		exit (write(1, "Error : Check-Path failed\n", 27));
-	write(1, "\n\n!--- Welcome to the Game---!\n", 31);
+	error_path(window);
+	write(1, "\n\n!--- Welcome to the Game---!\n\n", 32);
 	mlx_hook(window->win_ptr, 17, 0, ft_exie, NULL);
 	mlx_hook(window->win_ptr, 2, 0, ft_moves, window);
 	mlx_loop(window->mlx_ptr);
