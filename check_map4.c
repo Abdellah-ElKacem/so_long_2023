@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map3.c                                       :+:      :+:    :+:   */
+/*   check_map4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 15:44:28 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/02/01 12:06:19 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:37:40 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	tab_2_2(t_connect_data *map, t_images img)
+void	tab_2_2(t_connect_data *map)
 {
 	int			x;
 	int			y;
@@ -29,7 +29,7 @@ void	tab_2_2(t_connect_data *map, t_images img)
 		{
 			if (map->map[x][y] == 'C')
 				mlx_put_image_to_window(map->mlx_ptr \
-					, map->win_ptr, img.coin, dim_x, dim_y);
+					, map->win_ptr, map->imgs.coin, dim_x, dim_y);
 			dim_x += 32;
 			y++;
 		}
@@ -42,18 +42,12 @@ void	tab_2_2(t_connect_data *map, t_images img)
 
 void	put_map2(t_connect_data *map)
 {
-	t_images	img;
-	int			dim;
-
-	dim = 0;
-	img.coin = mlx_xpm_file_to_image(map->mlx_ptr \
-		, "./textures/coin.xpm", &dim, &dim);
-	if (!img.coin)
+	if (!map->imgs.coin)
 		exit(write(1, "Error : Img not Found !\n", 22));
-	tab_2_2(map, img);
+	tab_2_2(map);
 }
 
-void	tab_2_3(t_connect_data *map, t_images img)
+void	tab_2_3(t_connect_data *map)
 {
 	int			x;
 	int			y;
@@ -70,7 +64,7 @@ void	tab_2_3(t_connect_data *map, t_images img)
 		{
 			if (map->map[x][y] == 'E')
 				mlx_put_image_to_window(map->mlx_ptr \
-					, map->win_ptr, img.exit, dim_x, dim_y);
+					, map->win_ptr, map->imgs.exit, dim_x, dim_y);
 			dim_x += 32;
 			y++;
 		}
@@ -83,13 +77,7 @@ void	tab_2_3(t_connect_data *map, t_images img)
 
 void	put_map3(t_connect_data *map)
 {
-	t_images	img;
-	int			dim;
-
-	dim = 0;
-	img.exit = mlx_xpm_file_to_image(map->mlx_ptr \
-		, "./textures/exit.xpm", &dim, &dim);
-	if (!img.exit)
+	if (!map->imgs.exit || !map->imgs.exit_o)
 		exit(write(1, "Error : Img not Found !\n", 22));
-	tab_2_3(map, img);
+	tab_2_3(map);
 }

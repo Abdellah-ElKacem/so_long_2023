@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:14:05 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/02/01 17:28:22 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/02/03 14:58:14 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	create_map(t_connect_data *window, char **av)
 
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		return (-1);
+		exit(write(1, "Error File not Found !\n", 23));
 	readd = get_next_line(fd);
 	window->map_weight = ft_strlen(readd) - 1;
 	while (readd)
@@ -37,6 +37,7 @@ int	create_map(t_connect_data *window, char **av)
 void	the_checker(t_connect_data *window)
 {
 	ft_checker(window);
+	creat_imgs(window);
 	put_map_f(window);
 	put_map1(window);
 	put_map(window);
@@ -75,7 +76,9 @@ int	main(int ac, char **av)
 	the_checker(window);
 	error_path(window);
 	write(1, "\n\n!--- Welcome to the Game---!\n\n", 32);
-	mlx_hook(window->win_ptr, 17, 0, ft_exie, NULL);
+	mlx_hook(window->win_ptr, 17, 0, ft_exie, window);
 	mlx_hook(window->win_ptr, 2, 0, ft_moves, window);
 	mlx_loop(window->mlx_ptr);
+	mlx_destroy_image(window->mlx_ptr, window->win_ptr);
+	mlx_clear_window(window->mlx_ptr, window->win_ptr);
 }

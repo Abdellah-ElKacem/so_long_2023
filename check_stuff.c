@@ -6,7 +6,7 @@
 /*   By: ael-kace <ael-kace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:09:49 by ael-kace          #+#    #+#             */
-/*   Updated: 2023/02/01 11:49:53 by ael-kace         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:13:37 by ael-kace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	player_move(t_connect_data *data)
 	ft_printf("Moves is: [%d]\n", data->player);
 }
 
-int	ft_exie(void)
+int	ft_exie(t_connect_data *data)
 {
-	exit(write(1, "3ayan 3ayan !\n", 15));
+	mlx_destroy_image(data->mlx_ptr, data->win_ptr);
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	write(1, "3ayan 3ayan !\n", 15);
+	exit(0);
 }
